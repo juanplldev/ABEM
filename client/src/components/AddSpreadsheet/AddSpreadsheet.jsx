@@ -1,7 +1,7 @@
 // Dependencies
 import React, {useState, useEffect} from "react";
 import {useDispatch, useSelector} from "react-redux";
-import {useNavigate, Navigate, Link} from "react-router-dom";
+import {useNavigate, Navigate} from "react-router-dom";
 import swal from "sweetalert";
 // Files
 import {getUsers, addSpreadsheet} from "../../redux/actions/actions";
