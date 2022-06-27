@@ -3,7 +3,7 @@ import React, {useEffect} from "react";
 import {useDispatch, useSelector} from "react-redux";
 import {Navigate, useNavigate} from "react-router-dom";
 // Files
-import {profile} from "../../redux/actions/actions";
+import {getProfile} from "../../redux/actions/actions";
 import styles from "./Profile.module.css";
 
 function Profile()
@@ -13,7 +13,7 @@ function Profile()
     const loggedUser = window.localStorage.getItem("userData");
     const navigate = useNavigate();
     
-    useEffect(() => dispatch(profile(loggedUser)), [dispatch, loggedUser]);
+    useEffect(() => dispatch(getProfile(loggedUser)), [dispatch, loggedUser]);
     
     function handleLogout(e)
     {

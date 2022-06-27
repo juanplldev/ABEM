@@ -14,13 +14,16 @@ router.get("/users", async(req, res) => {
         try
         {
             const userNames = await User.findAll({
-                attributes: ["userName"],
+                attributes: ["name"],
             });
             const userEmails = await User.findAll({
                 attributes: ["email"],
             });
+            const userDnis = await User.findAll({
+                attributes: ["dni"],
+            });
             
-            const users = userNames.concat(userEmails);
+            const users = userNames.concat(userEmails, userDnis);
             
             res.send(users);
         }

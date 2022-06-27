@@ -1,12 +1,12 @@
 // Files
-import {REGISTER, LOGIN, PROFILE, GET_USERS} from "../actions/actions";
+import {REGISTER, LOGIN, GET_PROFILE, GET_USERS, GET_SPREADSHEET, POST_SPREADSHEET} from "../actions/actions";
 
 
 const initialState =
 {
     user: {},
     users: [],
-    session: {},
+    userSpreadsheets: [],
 };
 
 
@@ -20,11 +20,17 @@ function rootReducer(state = initialState, {type, payload})
         case LOGIN:
             return {...state, user: payload};
         
-        case PROFILE:
+        case GET_PROFILE:
             return {...state, user: payload};
         
         case GET_USERS:
             return {...state, users: payload};
+        
+        case GET_SPREADSHEET:
+            return {...state, userSpreadsheets: payload};
+        
+        case POST_SPREADSHEET:
+            return {...state, user: payload};
         
         default:
             return {...state};

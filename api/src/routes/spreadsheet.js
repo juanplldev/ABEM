@@ -1,44 +1,62 @@
 // Dependencies
 const {Router} = require("express");
 const router = Router();
-const {Op} = require("sequelize");
 // Files
 const {User, Spreadsheet} = require("../db");
-const {compare} = require("../controllers/bcrypt");
-const {signToken} = require("../controllers/tokens");
+const {verifyToken} = require("../controllers/tokens");
+const {API_KEY} = process.env;
 
-
-router.get("/spreadsheet/:id", async (req, res) => {
-    const {id} = req.params;
+router.get("/spreadsheet", async (req, res) => {
+    const {apiKey} = req.query;
     
-    try
+    if(apiKey === API_KEY)
     {
-        if(id)
+        try
         {
-            const foundUser = await User.findByPk(id, {
-                include:
-                {
-                    model: Spreadsheet,
-                },
-            }).catch(e => console.log("Incorrect id."));
+            const {authorization} = req.headers;
             
-            if(foundUser !== null && foundUser !== undefined)
+            if(authorization)
             {
-                res.send(foundUser.Spreadsheets);
+                const token = authorization.split(" ").pop();
+                const tokenData = await verifyToken(token);
+                const userID = tokenData !== undefined ? tokenData.id : null;
+                
+                if(userID)
+                {
+                    const foundUser = await User.findByPk(userID, {
+                        include:
+                        {
+                            model: Spreadsheet,
+                        },
+                    });
+                    
+                    if(foundUser !== null && foundUser !== undefined)
+                    {
+                        res.send(foundUser.Spreadsheets);
+                    }
+                    else
+                    {
+                        res.status(404).send("Incorrect user.");
+                    };
+                }
+                else
+                {
+                    res.status(409).send("Invalid token.");
+                };
             }
             else
             {
-                res.status(404).send("Incorrect user.");
-            }
+                res.status(404).send("All fields are required.");
+            };
         }
-        else
+        catch(error)
         {
-            res.status(404).send("All fields are required.");
+            console.log(error);
         };
     }
-    catch(error)
+    else
     {
-        console.log(error);
+        res.send("No authorization.");
     };
 });
 

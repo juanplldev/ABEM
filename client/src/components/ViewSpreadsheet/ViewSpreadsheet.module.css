@@ -1,0 +1,25 @@
+.Logout
+{
+    width: auto;
+    height: 30px;
+    border-radius: 5px;
+    cursor: pointer;
+    border: 1px solid rgba(0, 0, 0, 0.7);
+    background: rgb(53, 53, 53);
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    font-size: 15px;
+    color: #fff;
+}
+
+.ViewAll
+{
+    width: auto;
+    height: 30px;
+    border-radius: 5px;
+    cursor: pointer;
+    border: 1px solid rgba(0, 0, 0, 0.7);
+    background: rgb(53, 53, 53);
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    font-size: 15px;
+    color: #fff;
+}

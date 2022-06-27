@@ -56,8 +56,9 @@ function Login()
     
     async function handleSubmit(e)
     {
-        const foundUsername = users.filter(e => e.userName === input.user);
+        const foundUsername = users.filter(e => e.name === input.user);
         const foundEmail = users.filter(e => e.email === input.user);
+        const foundDni = users.filter(e => e.dni === input.user);
         
         if(Object.keys(validate(input)).length > 0)
         {
@@ -66,7 +67,7 @@ function Login()
         }
         else
         {
-            if((foundUsername.length || foundEmail.length))
+            if((foundUsername.length || foundEmail.length || foundDni.length))
             {
                 e.preventDefault();
                 const data = await dispatch(login(input)).catch(error => console.log(error));
@@ -81,7 +82,7 @@ function Login()
                     const userData =
                     {
                         id: payload.foundUser[0].id,
-                        userName: payload.foundUser[0].userName,
+                        name: payload.foundUser[0].name,
                         token: payload.token,
                     };
                     
@@ -96,7 +97,7 @@ function Login()
                     setUser(userData);
                     // ------------------------------------------------------
                     swal("Loged.");
-                    navigate("/profile");
+                    navigate("/payout");
                 };
             }
             else

@@ -16,9 +16,9 @@ function Register()
     const [errors, setErrors] = useState({});
     const [input, setInput] = useState({
         name: "",
-        lastName: "",
-        userName: "",
+        dni: "",
         email: "",
+        phone: "",
         password: "",
         repeatPassword: "",
     });
@@ -30,40 +30,53 @@ function Register()
     function validate(input)
     {
         const errors = {};
-        const foundUsername = users.filter(e => e.userName === input.userName);
+        const foundUsername = users.filter(e => e.name === input.name);
         const foundEmail = users.filter(e => e.email === input.email);
-
+        const foundDni = users.filter(e => e.dni === input.dni);
+        console.log(foundUsername);
         if(!input.name)
         {
             errors.name = <font color="red">*</font>;
         }
-        else if(!input.lastName)
+        else if(foundUsername.length)
         {
-            errors.lastName = <font color="red">*</font>;
+            errors.name = <p className={styles.Alert}>This name is already in use. Please try another.</p>;
         }
-        else if(!input.userName)
+        else if(!input.dni)
         {
-            errors.userName = <font color="red">*</font>;
+            errors.dni = <font color="red">*</font>;
+        }
+        else if(input.dni.length < 7 || input.dni.length > 8)
+        {
+            errors.dni = <p className={styles.Alert}>Enter a valid DNI.</p>;
+        }
+        else if(foundDni.length)
+        {
+            errors.dni = <p className={styles.Alert}>This dni is already in use. Please try another.</p>;
         }
         else if(!input.email)
         {
             errors.email = <font color="red">*</font>;
         }
-        else if(foundUsername.length)
-        {
-            errors.userName = <p className={styles.Alert}>This username isn't available. Please try another.</p>;
-        }
         else if(foundEmail.length)
         {
-            errors.email = <p className={styles.Alert}>This email is already in use available. Please try another.</p>;
+            errors.email = <p className={styles.Alert}>This email is already in use. Please try another.</p>;
+        }
+        else if(!input.phone)
+        {
+            errors.phone = <font color="red">*</font>;
         }
         else if(!input.password)
         {
             errors.password = <font color="red">*</font>;
         }
+        else if(input.password.length < 8)
+        {
+            errors.password = <p className={styles.Alert}>The password must contain at least 8 characters.</p>;
+        }
         else if(input.password !== input.repeatPassword)
         {
-            errors.repeatPassword = <p className={styles.Alert}>Passwords don't match.</p>;
+            errors.repeatPassword = <p className={styles.Alert}>Passwords doesn't match.</p>;
         };
         
         return errors;
@@ -95,9 +108,9 @@ function Register()
             dispatch(register(input));
             setInput({
                 name: "",
-                lastName: "",
-                userName: "",
+                dni: "",
                 email: "",
+                phone: "",
                 password: "",
             });
             swal("The user was successfully created!");
@@ -110,31 +123,33 @@ function Register()
         <div className={styles.Container}>
             <form onSubmit={e => handleSubmit(e)} className={styles.Form} >
                 <div>
-                    <input className={styles.Input} onChange={e => handleChange(e)} type="text" placeholder="Name" name="name"/>
+                    <input className={styles.Input} onChange={e => handleChange(e)} type="text" placeholder="Full name" name="name"/>
                     {
                         errors.name && errors.name
                     }
                 </div>
-                    
+                
                 <div>
-                    <input className={styles.Input} onChange={e => handleChange(e)} type="text" placeholder="Last name" name="lastName"/>
+                    <input className={styles.Input} onChange={e => handleChange(e)} type="number" placeholder="DNI" name="dni"/>
                     {
-                        errors.lastName && errors.lastName
+                        errors.dni && errors.dni
                     }
                 </div>
-                    
-                <div>
-                    <input className={styles.Input} onChange={e => handleChange(e)} type="text" placeholder="Username" name="userName"/>
-                    {
-                        errors.userName && errors.userName
-                    }
-                </div>
+                
                 <div>
                     <input className={styles.Input} onChange={e => handleChange(e)} type="email" placeholder="Email" name="email"/>
                     {
                         errors.email && errors.email
                     }
                 </div>
+                
+                <div>
+                    <input className={styles.Input} onChange={e => handleChange(e)} type="number" placeholder="Phone" name="phone"/>
+                    {
+                        errors.phone && errors.phone
+                    }
+                </div>
+                
                 <div>
                     <input className={styles.Input} onChange={e => handleChange(e)} type={password ? "text" : "password"} placeholder="Password" name="password"/>
                     {
@@ -146,12 +161,14 @@ function Register()
                         }
                     </button>
                 </div>
+                
                 <div>
                     <input className={styles.Input} onChange={e => handleChange(e)} type="password" placeholder="Repeat password" name="repeatPassword"/>
                     {
                         errors.repeatPassword && errors.repeatPassword
                     }
                 </div>
+                
                 <button className={styles.SubmitButton} type="submit">Register</button>
                 
                 <p>
