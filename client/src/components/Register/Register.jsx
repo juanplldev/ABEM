@@ -33,7 +33,7 @@ function Register()
         const foundUsername = users.filter(e => e.name === input.name);
         const foundEmail = users.filter(e => e.email === input.email);
         const foundDni = users.filter(e => e.dni === input.dni);
-        console.log(foundUsername);
+        
         if(!input.name)
         {
             errors.name = <font color="red">*</font>;
@@ -95,17 +95,18 @@ function Register()
         setPassword(password => !password);
     };
     
-    function handleSubmit(e)
+    async function handleSubmit(e)
     {
         if(Object.keys(validate(input)).length > 0)
         {
             e.preventDefault();
-            swal("All fields are required.");
+            swal("Please fill all fields correctly.");
         }
         else
         {
             e.preventDefault();
-            dispatch(register(input));
+            await dispatch(register(input));
+            await (dispatch(getUsers()));
             setInput({
                 name: "",
                 dni: "",

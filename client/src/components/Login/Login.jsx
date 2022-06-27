@@ -63,7 +63,7 @@ function Login()
         if(Object.keys(validate(input)).length > 0)
         {
             e.preventDefault();
-            swal("All fields are required.");
+            swal("Please fill all fields correctly.");
         }
         else
         {
@@ -83,7 +83,10 @@ function Login()
                     {
                         id: payload.foundUser[0].id,
                         name: payload.foundUser[0].name,
+                        email: payload.foundUser[0].email,
+                        dni: payload.foundUser[0].dni,
                         token: payload.token,
+                        is_Admin: payload.foundUser[0].is_Admin,
                     };
                     
                     window.localStorage.setItem("userData", JSON.stringify(userData));

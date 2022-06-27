@@ -12,6 +12,8 @@ function GetSpreadsheet()
     const userSpreadsheets = useSelector(state => state.userSpreadsheets);
     const lastSpreadsheet = userSpreadsheets.length && userSpreadsheets.pop();
     const loggedUser = window.localStorage.getItem("userData");
+    const userDataJson = JSON.parse(loggedUser);
+    const isAdmin = userDataJson ? userDataJson.is_Admin : false;
     const navigate = useNavigate();
     
     useEffect(() => dispatch(getSpreadsheet(loggedUser)), [dispatch, loggedUser]);
@@ -27,6 +29,12 @@ function GetSpreadsheet()
     {
         e.preventDefault();
         navigate("/allpayouts");
+    };
+    
+    function handleAddSpreadsheet(e)
+    {
+        e.preventDefault();
+        navigate("/spreadsheet");
     };
     
     if(loggedUser)
@@ -83,6 +91,14 @@ function GetSpreadsheet()
                     <br />
                     
                     <button className={styles.Logout} onClick={handleLogout} >Logout</button>
+                    
+                    <br />
+                    <br />
+                    
+                    {
+                        isAdmin ? <button className={styles.AddSpreadsheet}>Add spreadsheet</button>
+                        : null
+                    }
                 </div>
             );
         }
@@ -90,8 +106,16 @@ function GetSpreadsheet()
         {
             return(
                 <div>
-                    <h1>Todavía no hay datos.</h1>
+                    <h1>Todavía no hay payouts.</h1>
                     <button className={styles.Logout} onClick={handleLogout} >Logout</button>
+                    
+                    <br />
+                    <br />
+                    
+                    {
+                        isAdmin ? <button className={styles.AddSpreadsheet} onClick={handleAddSpreadsheet}>Add spreadsheet</button>
+                        : null
+                    }
                 </div>
             );
         };

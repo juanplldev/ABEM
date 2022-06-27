@@ -11,7 +11,6 @@ function ViewAllSpreadsheets()
 {
     const dispatch = useDispatch();
     const userSpreadsheets = useSelector(state => state.userSpreadsheets);
-    const lastSpreadsheet = userSpreadsheets.length && userSpreadsheets.pop();
     const loggedUser = window.localStorage.getItem("userData");
     const navigate = useNavigate();
     
@@ -25,7 +24,7 @@ function ViewAllSpreadsheets()
     
     if(loggedUser)
     {
-        if(lastSpreadsheet)
+        if(userSpreadsheets)
         {
             return(
                 <div>

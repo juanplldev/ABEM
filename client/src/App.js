@@ -9,6 +9,7 @@ import ForgotPassword from "./components/ForgotPassword/ForgotPassword.jsx";
 import ResetPassword from "./components/ResetPassword/ResetPassword.jsx";
 import ViewSpreadsheet from "./components/ViewSpreadsheet/ViewSpreadsheet.jsx";
 import ViewAllSpreadsheets from "./components/ViewAllSpreadsheets/ViewAllSpreadsheets.jsx";
+import AddSpreadsheet from "./components/AddSpreadsheet/AddSpreadsheet.jsx";
 
 
 function App() {
@@ -22,6 +23,7 @@ function App() {
         <Route exact path="/reset/:id" element={<ResetPassword/>} />
         <Route exact path="/payout" element={<ViewSpreadsheet/>} />
         <Route exact path="/allpayouts" element={<ViewAllSpreadsheets/>} />
+        <Route exact path="/spreadsheet" element={<AddSpreadsheet/>} />
       </Routes>
     </React.Fragment>
   );

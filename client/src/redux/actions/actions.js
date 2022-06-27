@@ -12,7 +12,7 @@ export const GET_USERS = "GET_USERS";
 export const FORGOT_PASSWORD = "FORGOT_PASSWORD";
 export const RESET_PASSWORD = "RESET_PASSWORD";
 export const GET_SPREADSHEET = "GET_SPREADSHEET";
-export const POST_SPREADSHEET = "POST_SPREADSHEET";
+export const ADD_SPREADSHEET = "ADD_SPREADSHEET";
 
 
 
@@ -115,11 +115,11 @@ export function getSpreadsheet(userData)
     };
 };
 
-export function postSpreadsheet(values)
+export function addSpreadsheet(values)
 {
     return async function(dispatch)
     {
         const data = (await axios.post(`${URL}/spreadsheet`, values)).data;
-        return dispatch({type: POST_SPREADSHEET, payload: data});
+        return dispatch({type: ADD_SPREADSHEET, payload: data});
     };
 };

@@ -1,0 +1,103 @@
+.Container
+{
+    position: relative;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 400px;
+    height: 800px;
+    background: gray;
+    border-radius: 20px;
+    border: 1px solid black;
+}
+
+.Form
+{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    align-items: center;
+}
+
+.Input
+{
+    width: 250px;
+    height: 30px;
+    margin-top: 15px;
+    border-radius: 8px;
+    border: none;
+    box-sizing: border-box;
+}
+
+.FirstInput
+{
+    width: 250px;
+    height: 30px;
+    margin-top: 60px;
+    border-radius: 8px;
+    border: none;
+    box-sizing: border-box;
+}
+
+.Form p
+{
+    font-size: 15px;
+    margin: 10px;
+}
+
+.Form a
+{
+    text-decoration: none;
+    color: rgba(55, 0, 255, 0.575);
+}
+
+.SubmitButton
+{
+    width: 150px;
+    height: 30px;
+    margin-top: 15px;
+    border-radius: 5px;
+    cursor: pointer;
+    border: 1px solid rgba(0, 0, 0, 0.7);
+    background: rgb(53, 53, 53);
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    font-size: 15px;
+    color: #fff;
+}
+
+.GoBack
+{
+    position: absolute;
+    left: 10px;
+    top: 10px;
+    width: auto;
+    height: 30px;
+    border-radius: 5px;
+    cursor: pointer;
+    border: 1px solid rgba(0, 0, 0, 0.7);
+    background: rgb(53, 53, 53);
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    font-size: 15px;
+    color: #fff;
+}
+
+.Alert
+{
+    width: 250px;
+    height: 30px;
+    margin-top: 15px;
+    border-radius: 8px;
+    border: none;
+    box-sizing: border-box;
+    border: 1px solid red;
+}
+
+.FirstInputAlert
+{
+    width: 250px;
+    height: 30px;
+    margin-top: 60px;
+    border-radius: 8px;
+    border: none;
+    box-sizing: border-box;
+    border: 1px solid red;
+}

@@ -29,10 +29,10 @@ function Profile()
                 <h1>User info</h1>
                 <h2>Name:</h2>
                 <h3>{user.name}</h3>
-                <h2>Last name:</h2>
-                <h3>{user.lastName}</h3>
-                <h2>Username:</h2>
-                <h3> {user.userName}</h3>
+                <h2>Phone:</h2>
+                <h3>{user.phone}</h3>
+                <h2>DNI:</h2>
+                <h3> {user.dni}</h3>
                 <h2>Email:</h2>
                 <h3> {user.email}</h3>
                 <button className={styles.Logout} onClick={handleLogout} >Logout</button>
